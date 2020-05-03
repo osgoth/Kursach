@@ -1,0 +1,34 @@
+{% extends 'bare.html' %}
+{% load static %}
+{% block content %}	
+
+	<!-- Custom styles for this template -->
+  	<link href="{% static 'website/css/full-width-pics.css' %}" rel="stylesheet">
+
+    <div class="container">
+      <!-- Content section 1-->
+      <section class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1076');">
+        <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
+        <div style="height: 200px;"></div>
+      </section>
+      <section class="py-5">
+        <div class="container">
+            <h2>Рекламное агентство REKLAMA</h2>
+            <p class="lead">Мы - агентство полного цикла, предлагающие клиенту полностью готовые решения. Никакой лишней мороки только по-настоящему эффективная реклама.</p>
+        </div>
+      </section>
+
+
+  	<!-- Content section 2 -->
+      <section class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1081');">
+          <div style="height: 200px;"></div>
+      </section>
+    	<section class="py-5">
+    		<div class="container">
+            	<h2>“Мелочи”, которые стоят вам миллионы</h2>
+          		<p class="lead">Каждая "мелочь" может принести миллионные убытки - или вознести Ваш бизнес на вершины успеха. Именно поэтому мы скрупулезно подходим к каждому заказу и стремимся сделать всё, чтобы каждая вложенная в рекламу копейка принесла свои плоды.</p>
+        </div>
+    	</section>
+    </div>
+
+{% endblock %}

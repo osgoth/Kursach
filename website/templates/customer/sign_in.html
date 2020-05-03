@@ -1,0 +1,44 @@
+{% extends 'bare.html' %}
+{% load static %}
+{% block content %}	
+  <!-- Custom styles for this template -->
+  <link href="{% static 'website/css/sign.css' %}" rel="stylesheet">
+
+  <div class="container mt-5">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center font-weight-bold">Войти</h5>
+              
+
+              <form class="form-signin" method="post">
+                {% csrf_token %}
+                
+                <div class="form-label-group">
+                  <input type="text" name="username" id="id_username" class="form-control">
+                  <label for="id_username">Имя пользователя:</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input type="password" name="password" id="id_password" class="form-control">
+                  <label for="id_password">Пароль:</label>
+                </div>
+
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Войти</button>
+                <a class="d-block text-center text-muted mt-2 small" href="/sign_up">Регистрация</a>
+
+
+              </form>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="mt-5"></div>
+
+
+{% endblock %}

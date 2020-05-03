@@ -1,0 +1,46 @@
+{% extends 'bare.html' %}
+{% load static %}
+{% block content %}	
+  
+  <div class="container d-flex mt-5">
+
+      <!-- Right column -->
+      <div class="col-md-3 text-center" id="sidebar-wrapper">
+          <div class="sidebar-heading mt-2 mb-2"><h5>Настройки</h5></div>
+          <a href="/foremployee" class="list-group-item list-group-item-action border-0 bg-light">Профиль</a>
+          <div class="list-group list-group-flush">
+            <div class="dropdown">
+              <a href="#" class="list-group-item list-group-item-action bg-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Заявки</a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/foremployee/requests">Активные заявки</a>
+                <a class="dropdown-item" href="/foremployee/requests">Завершенные заявки</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <a href="#" class="list-group-item list-group-item-action bg-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Проекты</a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">                
+                <a class="dropdown-item" href="/foremployee/projects">Мои проекты</a>
+                <a class="dropdown-item" href="/foremployee/projects">Активные проекты</a>
+                <a class="dropdown-item" href="/foremployee/projects">Завершенные проекты</a>                
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <!-- Description -->
+      <div class="container-fluid">
+        <h2 class="mb-2">Алексей Марковский</h2><hr>
+        <h5 class="text-muted font-weight-light">Senior-Pomidor</h5><hr>
+        <h4>Почта:</h4> 
+        <p>almarka03@gmail.com</p>
+        <h5>Номер:</h5>
+        <p>+380952793306</p>
+        <h5>Дата регистрации:</h5>
+        <p>11.22.2019</p>
+      </div>
+
+  </div>
+
+{% endblock %}
+
+

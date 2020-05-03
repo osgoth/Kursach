@@ -1,0 +1,25 @@
+{% extends 'bare.html' %}
+{% load static %}
+{% block content %}	
+	 
+   <div class="container">
+    {% for card in cards %}
+      <div class="mt-4">
+        <img class="d-block img-fluid" src="{{card.picture}}" style="width: 50%; height: 50%;">
+      </div>
+
+      <!-- Description -->
+      
+      <div class="card-body">
+            <h3 class="card-title">{{card.name}}</h3>
+            <h4>от {{card.price}} грн</h4>
+            <p class="card-text">{{card.description}}</p>
+            <div class="mt-4 mb-4">        
+              <a class="btn btn-danger" href="/confirm">Заказать сразу</a>
+              <a class="btn btn-outline-secondary" href="/basket">Добавить в корзину</a>
+            </div>
+      </div>
+      {%endfor%}
+    </div>
+
+{% endblock %}

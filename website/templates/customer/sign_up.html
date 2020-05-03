@@ -1,0 +1,65 @@
+{% extends 'bare.html' %}
+{% load static %}
+{% block content %}	
+	<!-- Custom styles for this template -->
+	<link href="{% static 'website/css/sign.css' %}" rel="stylesheet">
+	
+	<div class="container">
+	    <div class="row">
+	      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+	        <div class="card card-signin flex-row my-5">
+	          <div class="card-img-left d-none d-md-flex">
+	             <!-- Background image for card set in CSS! -->
+	          </div>
+	          
+	        <div class="card-body">
+
+	        	<!--  <form method="post">
+		          	{% csrf_token %}
+		          	{{ form }}
+		          	<input class="btn" type="submit" value="go">
+		          </form>
+ -->
+		          
+	            <h5 class="card-title text-center font-weight-bold">Регистрация пользователя</h5>
+	            <form class="form-signin" method="post">
+	              {% csrf_token %}
+	              <div class="form-label-group">
+	                <input type="text" name="username" maxlength="150" autofocus required id="id_username" class="form-control">
+	                <label for="id_username">Имя пользователя:</label>
+	              </div>
+	              
+	              <hr>
+	              <div class="form-label-group">
+	                <input type="password" name="password1" required id="id_password1" class="form-control">
+	                <label for="id_password1">Пароль:</label>
+	                <!-- <span class="helptext">
+						<ul class = "text-muted">
+							<li>Ваш пароль не должен совпадать с вашим именем или другой персональной информацией или быть слишком похожим на неё.</li>
+							<li>Ваш пароль должен содержать как минимум 8 символов.</li>
+							<li>Ваш пароль не может быть одним из широко распространённых паролей.</li>
+							<li>Ваш пароль не может состоять только из цифр.</li>
+						</ul>
+					</span> -->
+	              </div>
+	              
+	              <div class="form-label-group">
+	                <input type="password" name="password2" required id="id_password2" class="form-control">
+	                <label for="id_password2">Подтверждение пароля:</label>
+	              </div>
+
+	              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Зарегистрироваться</button>
+	              <a class="d-block text-center mt-2 text-muted small" href="/sign_in">Войти</a>
+
+	            </form>
+
+
+
+	        </div>
+	        </div>
+	      </div>
+	    </div>
+	</div>
+	
+
+{% endblock %}

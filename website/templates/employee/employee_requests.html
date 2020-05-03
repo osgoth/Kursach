@@ -1,0 +1,60 @@
+{% extends 'bare.html' %}
+{% load static %}
+{% block content %}	
+  
+    <div class="container d-flex mt-5">
+
+	      <!-- Right column -->
+	      <div class="col-md-3 text-center" id="sidebar-wrapper">
+	          <div class="sidebar-heading mt-2 mb-2"><h5>Настройки</h5></div>
+	          <a href="/foremployee" class="list-group-item list-group-item-action border-0 bg-light">Профиль</a>
+	          <div class="list-group list-group-flush">
+	            <div class="dropdown">
+	              <a href="#" class="list-group-item list-group-item-action bg-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Заявки</a>
+	              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+	                <a class="dropdown-item" href="/foremployee/requests">Активные заявки</a>
+	                <a class="dropdown-item" href="/foremployee/requests">Завершенные заявки</a>
+	              </div>
+	            </div>
+	            <div class="dropdown">
+	              <a href="#" class="list-group-item list-group-item-action bg-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Проекты</a>
+	              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">                
+	                <a class="dropdown-item" href="/foremployee/projects">Мои проекты</a>
+	                <a class="dropdown-item" href="/foremployee/projects">Активные проекты</a>
+	                <a class="dropdown-item" href="/foremployee/projects">Завершенные проекты</a>                
+	              </div>
+	            </div>
+	          </div>
+	      </div>
+
+	    <!-- Description -->
+	    <div class="container-fluid">
+	        <h2 class="mb-2">Заявки</h2><hr>	
+	        <!-- Orders -->
+		    <div class="mt-4">
+		        <h5 class="">Активные заявки:</h5>
+		        <table class="table mt-4">
+					  <thead>
+					    <tr>
+					      <th scope="col">ID</th>
+					      <th scope="col">Дата</th>
+					      <th scope="col">Кол-во сделок</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <td scope="row"><a href="/foremployee/requests/?p=119">119</a></td>
+					      <td class="text-muted">11.23.2019 13:45</td>
+					      <td class="text-muted">1</td>
+					    </tr>
+					  </tbody>
+				</table>
+		        <hr>
+	        </div>
+	    </div>
+
+	</div>
+
+{% endblock %}
+
+
