@@ -133,17 +133,9 @@ def profile_orders(request):
 
 
 def employee_profile(request):
-<<<<<<< HEAD
 	email = request.user.email
 	EmployeeInfo = Employee.objects.filter(email=email)
 	return render(request, 'employee/employee_profile.html')
-=======
-    email = request.user.email
-    EmployeeInfo = Employee.objects.filter(email=email)
-    print(EmployeeInfo)
-    return render(request, "employee/employee_profile.html")
-
->>>>>>> a5b46054eeb45c0506a19a576c0a7eab69aab5b3
 
 def employee_requests(request):
     return render(request, "employee/employee_requests.html")

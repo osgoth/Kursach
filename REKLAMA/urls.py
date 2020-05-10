@@ -5,7 +5,6 @@ from django.urls import re_path
 
 
 urlpatterns = [
-<<<<<<< HEAD
     path('admin/', admin.site.urls),
     path('admin_settings_empl/', views.admin_settings_empl),
     path('admin_new_empl/', views.admin_new_empl),
@@ -31,32 +30,4 @@ urlpatterns = [
     path('foremployee/', views.employee_profile, name='employee_profile'),
     path('foremployee/projects/', views.employee_projects, name='employee_projects'),
     path('foremployee/requests/', views.employee_requests, name='employee_requests'),
-
-
-
-=======
-    path("admin/", admin.site.urls),
-    path("", views.index, name="main_page"),
-    path("contacts/", views.contacts, name="contacts"),
-    path("portfolio/", views.portfolio, name="portfolio"),
-    path("confirm/", views.confirm, name="confirm"),
-    path("conditions/", views.conditions, name="conditions"),
-    path("basket/", views.basket, name="basket"),
-    path("logout/", views.logout_view, name="basket"),
-    path("services/<int:service_id>/", views.service_detail, name="service_detail"),
-    re_path(
-        r"^services(?:/(?P<category>\w+))?(?:/(?P<types>\w+))?/$",
-        views.services,
-        name="services",
-    ),
-    path("sign_in/", views.sign_in, name="sign_in"),
-    path("sign_up/", views.sign_up, name="sign_up"),
-    path("profile/", views.profile, name="profile"),
-    path("profile/settings/", views.profile_settings, name="profile_settings"),
-    path("profile/orders/", views.profile_orders, name="profile_orders"),
-    path("foremployee/sign_in/", views.employee_sign_in, name="employee_sign_in_"),
-    path("foremployee/", views.employee_profile, name="employee_profile"),
-    path("foremployee/projects/", views.employee_projects, name="employee_projects"),
-    path("foremployee/requests/", views.employee_requests, name="employee_requests"),
->>>>>>> a5b46054eeb45c0506a19a576c0a7eab69aab5b3
 ]

@@ -2,32 +2,58 @@ from django.db import models
 from datetime import datetime, date
 
 
-<<<<<<< HEAD
 gender_choise = [('male','мужской'),('female','женский')]
-Categories = [('internet','internet'), ('outdoor','outdoor'), ('indoor','indoor'), ('transport','transport'), ('media','media'), ('polygraphy','polygraphy')]
-Types = [('targeting', 'targeting'),('banners', 'banners'),('instagram', 'instagram'),('youtube', 'youtube'), ('website','website'),
-         ('arch', 'arch'),('poster', 'poster'),('backlight', 'backlight'),('billboard', 'billboard'), ('citylight','citylight'), ('scroll','scroll'),
-         ('university', 'university'),('shopping center', 'shopping center'),('cinema', 'cinema'),('elevator', 'elevator'), ('parking','parking'),
-         ('bus', 'bus'),('trolleybus', 'trolleybus'),('tram', 'tram'),('autobrending', 'autobrending'), ('train','train'),
-         ('tv', 'tv'),('radio', 'radio'),('video', 'video'),('photo', 'photo'),
-         ('newspaper', 'newspaper'),('flyer', 'flyer'),('bussiness card', 'bussiness card'),('sticker', 'sticker'), ('calendar','calendar') ]
+Categories = [
+    ("internet", "internet"),
+    ("outdoor", "outdoor"),
+    ("indoor", "indoor"),
+    ("transport", "transport"),
+    ("media", "media"),
+    ("polygraphy", "polygraphy"),
+]
+Types = [
+    ("targeting", "targeting"),
+    ("banners", "banners"),
+    ("instagram", "instagram"),
+    ("youtube", "youtube"),
+    ("website", "website"),
+    ("arch", "arch"),
+    ("poster", "poster"),
+    ("backlight", "backlight"),
+    ("billboard", "billboard"),
+    ("citylight", "citylight"),
+    ("scroll", "scroll"),
+    ("university", "university"),
+    ("shopping center", "shopping center"),
+    ("cinema", "cinema"),
+    ("elevator", "elevator"),
+    ("parking", "parking"),
+    ("bus", "bus"),
+    ("trolleybus", "trolleybus"),
+    ("tram", "tram"),
+    ("autobrending", "autobrending"),
+    ("train", "train"),
+    ("tv", "tv"),
+    ("radio", "radio"),
+    ("video", "video"),
+    ("photo", "photo"),
+    ("newspaper", "newspaper"),
+    ("flyer", "flyer"),
+    ("bussiness card", "bussiness card"),
+    ("sticker", "sticker"),
+    ("calendar", "calendar"),
+]
 
-
-=======
->>>>>>> a5b46054eeb45c0506a19a576c0a7eab69aab5b3
 class Customers(models.Model):
     username = models.CharField(max_length=50, unique=True, null=False)
     name = models.CharField(max_length=50, null=True)
     surname = models.CharField(max_length=50, null=True)
     email = models.EmailField(max_length=50, unique=True)
     birthday = models.DateField(null=True)
-<<<<<<< HEAD
-    gender = models.CharField(max_length = 15, choices = gender_choise, null=True)
+    gender = models.CharField(max_length = 15, choices = gender_choise, default='мужской')
     phone = models.CharField(max_length = 13, unique = True, null=True)    
-=======
     gender = models.BooleanField(null=True)
     phone = models.CharField(max_length=13, unique=True, null=True)
->>>>>>> a5b46054eeb45c0506a19a576c0a7eab69aab5b3
     reg_date = models.DateField()
 
     def __unicode__(self):
@@ -75,17 +101,10 @@ class Employee(models.Model):
     surname = models.CharField(max_length=50)
     email = models.EmailField(max_length=50, unique=True)
     birthday = models.DateField()
-<<<<<<< HEAD
     gender = models.CharField(max_length = 15, choices = gender_choise, default='мужской')
     phone = models.CharField(max_length = 13, unique = True)
     position = models.CharField(max_length =50)
     status = models.CharField(max_length =50, default='active')  
-=======
-    gender = models.BooleanField()
-    phone = models.CharField(max_length=13, unique=True)
-    position = models.CharField(max_length=50)
-    status = models.BooleanField()
->>>>>>> a5b46054eeb45c0506a19a576c0a7eab69aab5b3
     reg_date = models.DateField()
 
     def __unicode__(self):
@@ -101,50 +120,6 @@ class Employee(models.Model):
         managed = True
 
 
-<<<<<<< HEAD
-=======
-Categories = [
-    ("internet", "internet"),
-    ("outdoor", "outdoor"),
-    ("indoor", "indoor"),
-    ("transport", "transport"),
-    ("media", "media"),
-    ("polygraphy", "polygraphy"),
-]
-Types = [
-    ("targeting", "targeting"),
-    ("banners", "banners"),
-    ("instagram", "instagram"),
-    ("youtube", "youtube"),
-    ("website", "website"),
-    ("arch", "arch"),
-    ("poster", "poster"),
-    ("backlight", "backlight"),
-    ("billboard", "billboard"),
-    ("citylight", "citylight"),
-    ("scroll", "scroll"),
-    ("university", "university"),
-    ("shopping center", "shopping center"),
-    ("cinema", "cinema"),
-    ("elevator", "elevator"),
-    ("parking", "parking"),
-    ("bus", "bus"),
-    ("trolleybus", "trolleybus"),
-    ("tram", "tram"),
-    ("autobrending", "autobrending"),
-    ("train", "train"),
-    ("tv", "tv"),
-    ("radio", "radio"),
-    ("video", "video"),
-    ("photo", "photo"),
-    ("newspaper", "newspaper"),
-    ("flyer", "flyer"),
-    ("bussiness card", "bussiness card"),
-    ("sticker", "sticker"),
-    ("calendar", "calendar"),
-]
-
->>>>>>> a5b46054eeb45c0506a19a576c0a7eab69aab5b3
 
 class Services(models.Model):
     department = models.ForeignKey(Departments, on_delete=models.CASCADE)
