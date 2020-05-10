@@ -53,9 +53,7 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown">{{user.username}}</a>
                     <ul class="dropdown-menu">     
 
-                      {% if admin in request.user.groups.all %} <h1>XYI</h1> {% endif %}                
-
-                      {%if request.user == "admin" %}
+                      {%if request.user.groups.all.0|stringformat:"s" == "Admins" %}
                         <li><a class="dropdown-item" href="/admin/">Меню</a></li>
 
                       {%elif request.user.groups.all.0|stringformat:"s" == "Employees" %}

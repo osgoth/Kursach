@@ -10,7 +10,7 @@ cursor = connection.cursor()
 
 
 def index(request):
-	print( str(request.user.__str__) )
+	print( request.user )
 	context = {'res': request}
 	return render(request, 'index.html', context)
 
@@ -68,12 +68,20 @@ def sign_in(request):
 	return render(request, 'customer/sign_in.html', {'form':form})
 
 def sign_up(request):
+	print(request.method)
 	if request.method == 'POST':
+		request.POST._mutable = True
+		email = request.POST['email']
+		del request.POST['email']
+
+		print(request.POST)
 		form = UserCreationForm(request.POST)
+		print(form.is_valid())
+
+
 		if form.is_valid():
 			user = form.save()
 			login(request, user)
-			print('USER LOGGINED')
 			return redirect(index)
 	else:
 		form = UserCreationForm()
@@ -85,13 +93,29 @@ def sign_up(request):
 def profile(request):
 	return render(request, 'customer/profile.html')
 
+
+
+
 def profile_settings(request):
+	data = Customers.objects.filter(email=email)
+	if request.method == 'POST':
+		form = ProfileChanges(data=request.POST)
+		if form.is_valid():
+			user = form.save()
+			return redirect(profile_settings)
 	return render(request, 'customer/profile_settings.html')
+
+
+
+
 
 def profile_orders(request):
 	return render(request, 'customer/profile_orders.html')
 
 def employee_profile(request):
+	email = request.user.email
+	EmployeeInfo = Employee.objects.filter(email=email)
+	print(EmployeeInfo)
 	return render(request, 'employee/employee_profile.html')
 
 def employee_requests(request):

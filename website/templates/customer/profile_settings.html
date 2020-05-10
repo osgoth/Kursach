@@ -17,67 +17,41 @@
 	    </div>
 
 	    <!-- Forms -->
-		<form class="needs-validation" novalidate>
+		<form class="needs-validation" action="/profile/settings/" method="post" novalidate>
 
 			<!-- Name, Surname, Username -->
 			<div class="form-row">
 			    <div class="col-md-4 mb-3">
 			      <label for="validationCustom01"><h5>Имя</h5></label>
-			      <input type="text" class="form-control" id="validationCustom01" placeholder="Имя" value="" required>
+			      <input type="text" class="form-control" id="validationCustom01" name="name" placeholder="Имя" >
 			      <div class="valid-feedback">Отлично!</div>
 			    </div>
 			    <div class="col-md-4 mb-3">
 			      <label for="validationCustom02"><h5>Фамилия</h5></label>
-			      <input type="text" class="form-control" id="validationCustom02" placeholder="Фамилия" value="" required>
+			      <input type="text" class="form-control" id="validationCustom02" name="surname"  placeholder="Фамилия">
 			      <div class="valid-feedback">Отлично!</div>
-			    </div>
-			    <div class="col-md-4 mb-3">
-			      <label for="validationCustomUsername"><h5>Имя пользователя</h5></label>
-			      <div class="input-group">
-			        <div class="input-group-prepend">
-			          <span class="input-group-text" id="inputGroupPrepend">@</span>
-			        </div>
-			        <input type="text" class="form-control" id="validationCustomUsername" placeholder="Имя пользователя" aria-describedby="inputGroupPrepend" required>
-			        <div class="invalid-feedback">
-			          Пожалуйста выберите имя пользователя.
-			        </div>
-			      </div>
 			    </div>
 			  </div>
 
 			<!-- Email -->
 			<div class="form-group">
 			    <label for="exampleFormControlInput1"><h5>Почта</h5></label>
-			    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="almarka03@gmail.com" value="" required>
+			    <input type="email" class="form-control" id="exampleFormControlInput1" name="email" placeholder="email@gmail.com">
 			</div>
 
 			<!-- Phone -->
 			<div class="form-group">
 			    <label for="exampleFormControlInput1"><h5>Номер телефона</h5></label>
-			    <input type="phone" class="form-control" id="exampleFormControlInput1" placeholder="+380952793306" value="" required>
+			    <input type="phone" class="form-control" id="exampleFormControlInput1" name="phone" placeholder="+38023456789">
 			</div>
 
 		  	<!-- Gender -->
 			<div class="form-group">
-			  	<label for="exampleFormControlSelect1" value="" required><h5>Пол</h5></label>
+			  	<label for="exampleFormControlSelect1" value="" required name="gender"><h5>Пол</h5></label>
 			  	<select class="form-control form-control-sm">
 				  <option>Мужской</option>
 				  <option>Женский</option>
 				</select>
-			</div>
-
-		  	<!-- Address -->
-		    <label for="exampleFormControlSelect1"><h5>Адрес</h5></label></br>
-			<div class="form-row">
-			    <div class="col-4">
-			      <input type="text" class="form-control" placeholder="Город" value="" required>
-			    </div>
-			    <div class="col-4">
-			      <input type="text" class="form-control" placeholder="Страна" value="" required>
-			    </div>
-			    <div class="col">
-			      <input type="text" class="form-control" placeholder="Zip" value="" required>
-			    </div>
 			</div>
 
 			<!-- Birthday -->
@@ -85,13 +59,13 @@
 			    <label for="exampleFormControlSelect1"><h5>Дата рождения</h5></label>
 				<div class="form-row">
 				    <div class="col-4">
-				      <input type="text" class="form-control" placeholder="День" value="" required>
+				      <input type="text" class="form-control" placeholder="День" name="day">
 				    </div>
 				    <div class="col-4">
-				      <input type="text" class="form-control" placeholder="Месяц" value="" required>
+				      <input type="text" class="form-control" placeholder="Месяц"  nasme="month">
 				    </div>
 				    <div class="col">
-				      <input type="text" class="form-control" placeholder="Год" value="" required>
+				      <input type="text" class="form-control" placeholder="Год"  name="year">
 			    </div>
 			</div>
 
