@@ -19,76 +19,75 @@
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-info text-white relative-top ">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <h2 class="font-weight-light text-monospace">REKLAMA</h2>
-            </a>
-            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Главная</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'services' %}">Услуги</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/portfolio/">Портфолио</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contacts/">Контакты</a>
-                    </li>
-                    {%if not user.is_authenticated%}
-                    {%if request.path != "/sign_in/"%}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/sign_in/">Вход</a>
-                    </li>
-                    {%endif%}
-                    {%else%}
-                    {%if request.user.is_authenticated%}
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown">{{user.username}}</a>
-                            <ul class="dropdown-menu">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info text-white relative-top ">
+    <div class="container">
+      <a class="navbar-brand" href="/"><h2 class="font-weight-light text-monospace">REKLAMA</h2></a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Главная</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/services/">Услуги</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/portfolio/">Портфолио</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contacts/">Контакты</a>
+          </li>
+          {%if not user.is_authenticated%}
+              {%if request.path != "/sign_in/"%}
+                <li class="nav-item">
+                  <a class="nav-link" href="/sign_in/">Вход</a>
+                </li>
+              {%endif%}
+          {%else%}
+              {%if request.user.is_authenticated%}
+                <li class="nav-item">
+                  <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">{{user.username}}</a>
+                    <ul class="dropdown-menu">     
 
-                                {%if request.user.groups.all.0|stringformat:"s" == "Admins" %}
-                                <li><a class="dropdown-item" href="/admin/">Меню</a></li>
+                      {%if request.user.groups.all.0|stringformat:"s" == "Admins" %}
+                        <li><a class="dropdown-item" href="/admin_settings_empl/">Настройки</a></li>
+                        <li><a class="dropdown-item" href="/admin/">Меню</a></li>
 
-                                {%elif request.user.groups.all.0|stringformat:"s" == "Employees" %}
-                                <li><a class="dropdown-item" href="/foremployee/">Меню</a></li>
+                      {%elif request.user.groups.all.0|stringformat:"s" == "Employees" %}
+                        <li><a class="dropdown-item" href="/foremployee/">Меню</a></li>
 
-                                {%else%}
-                                <li><a class="dropdown-item" href="/profile/settings/">Меню</a></li>
+                      {%else%}
+                        <li><a class="dropdown-item" href="/profile/settings/">Меню</a></li>
 
-                                {%endif%}
+                      {%endif%}
 
-                                <li>
-                                    <a class="dropdown-item" href="/logout/">Выход</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    {%endif%}
+                        <li>
+                          <a class="dropdown-item" href="/logout/">Выход</a>
+                        </li>
+                    </ul>
+                  </div>
+                </li>
+              {%endif%}
 
-                    {%endif%}
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Page Content -->
-    <div class="content">
-        {% block content %}
-        {% endblock %}
+          {%endif%}
+        </ul>
+      </div>
     </div>
+  </nav>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'website/vendor/jquery/jquery.slim.min.js' %}"></script>
-    <script src="{% static 'website/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <!-- Page Content -->
+  <div class="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'website/vendor/jquery/jquery.slim.min.js' %}"></script>
+  <script src="{% static 'website/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
     <!-- Footer -->
     <footer id="sticky-footer" class="footer py-3 bg-light ">

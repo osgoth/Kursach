@@ -25,6 +25,18 @@ def portfolio(request):
     return render(request, "portfolio.html")
 
 
+def admin_settings_dep(request):
+	return render(request, 'admin/admin_settings_dep.html')
+
+def admin_settings_empl(request):
+	cards = Employee.objects.all()		
+	context = {'cards': cards}
+	return render(request, 'admin/admin_settings_empl.html', context)
+
+def admin_new_empl(request):
+	return render(request, 'admin/admin_new_empl.html')
+
+
 def logout_view(request):
     logout(request)
     return redirect("main_page")
@@ -121,11 +133,9 @@ def profile_orders(request):
 
 
 def employee_profile(request):
-    email = request.user.email
-    EmployeeInfo = Employee.objects.filter(email=email)
-    print(EmployeeInfo)
-    return render(request, "employee/employee_profile.html")
-
+	email = request.user.email
+	EmployeeInfo = Employee.objects.filter(email=email)
+	return render(request, 'employee/employee_profile.html')
 
 def employee_requests(request):
     return render(request, "employee/employee_requests.html")

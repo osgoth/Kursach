@@ -1,0 +1,131 @@
+{% extends 'bare.html' %}
+{% load static %}
+{% block content %}	
+  
+  	<div class="container d-flex mt-5">
+
+  		<!-- Right column -->
+	    <div class="col-md-3 text-center" id="sidebar-wrapper">
+	        <div class="sidebar-heading mt-2 mb-2"><h5>Админ настройки</h5></div>
+	        <div class="list-group list-group-flush">
+	        	<a href="/admin_settings_empl/" class="list-group-item list-group-item-action bg-light dropdown-toggle" data-toggle="dropdown">Работники</a>
+	              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+	                <a class="dropdown-item" href="/admin_new_empl/">Новый сотрудник</a>
+	                <a class="dropdown-item" href="/admin_settings_empl/">Штаб</a>
+	              </div>
+		        <!-- <a href="/admin_settings_dep/" class="list-group-item list-group-item-action bg-light">Департаменты</a> -->
+		        <a href="/logout/" class="list-group-item list-group-item-action bg-light">Выйти</a>
+	        </div>
+	    </div>
+
+	    <!-- Forms -->
+		<form class="needs-validation" action="/profile/settings/" method="post" novalidate>
+			<h2>Регистрация нового сотрудника</h2>
+			<hr class="mb-5">
+			<!-- Name, Surname, Username -->
+			<div class="form-row">
+				<div class="col-md-4 mb-3">
+			      <label for="validationCustom01"><h5>Юзернейм</h5></label>
+			      <input type="text" class="form-control" id="validationCustom00" name="username" placeholder="Юзернейм" >
+			      <div class="valid-feedback">Отлично!</div>
+			    </div>
+			    <div class="col-md-4 mb-3">
+			      <label for="validationCustom01"><h5>Имя</h5></label>
+			      <input type="text" class="form-control" id="validationCustom01" name="name" placeholder="Имя" >
+			      <div class="valid-feedback">Отлично!</div>
+			    </div>
+			    <div class="col-md-4 mb-3">
+			      <label for="validationCustom02"><h5>Фамилия</h5></label>
+			      <input type="text" class="form-control" id="validationCustom02" name="surname"  placeholder="Фамилия">
+			      <div class="valid-feedback">Отлично!</div>
+			    </div>
+			  </div>
+			  <hr>
+
+			<!-- Position, Gender -->
+			<div class="form-row">
+				<div class="col-md-4 mb-3">
+			      <label for="validationCustom01"><h5>Должость</h5></label>
+			      <input type="text" class="form-control" id="validationCustom00" name="position" placeholder="должность" >
+			      <div class="valid-feedback">Отлично!</div>
+			    </div>
+			    <div class="col-md-4 mb-3">
+			        <label for="exampleFormControlSelect1" value="" required name="gender"><h5>Пол</h5></label>
+					<select class="form-control form-control-sm">
+				        <option>Мужской</option>
+					    <option>Женский</option>
+					</select>			      
+			    </div>
+			  </div>
+
+			<!-- Email -->
+			<div class="form-group">
+			    <label for="exampleFormControlInput1"><h5>Почта</h5></label>
+			    <input type="email" class="form-control" id="exampleFormControlInput1" name="email" placeholder="email@gmail.com">
+			</div>
+
+			<!-- Phone -->
+			<div class="form-group">
+			    <label for="exampleFormControlInput1"><h5>Номер телефона</h5></label>
+			    <input type="phone" class="form-control" id="exampleFormControlInput1" name="phone" placeholder="+38023456789">
+			</div>
+
+
+			<!-- Birthday -->
+			<div class="form-group mt-3">
+			    <label for="exampleFormControlSelect1"><h5>Дата рождения</h5></label>
+				<div class="form-row">
+				    <div class="col-4">
+				      <input type="text" class="form-control" placeholder="День" name="day">
+				    </div>
+				    <div class="col-4">
+				      <input type="text" class="form-control" placeholder="Месяц"  nasme="month">
+				    </div>
+				    <div class="col">
+				      <input type="text" class="form-control" placeholder="Год"  name="year">
+			    </div>
+			</div>
+			<hr>
+
+			<!-- PASSWORDS -->
+			<div class="form-group mt-5">
+				<div class="form-label-group">
+		            <input type="password" name="password1" required id="id_password1" class="form-control" required>
+		            <label for="id_password1">Пароль:</label>
+		        </div>
+		        <div class="form-label-group">
+		            <input type="password" name="password2" required id="id_password2" class="form-control" required>
+		            <label for="id_password2">Подтверждение пароля:</label>
+		        </div>
+		    </div>
+
+			<!-- Submitting -->
+			<button class="btn btn-primary" type="submit">Сохранить</button>
+		</form>
+
+		<!-- validation Script -->
+		<script>
+			// Example starter JavaScript for disabling form submissions if there are invalid fields
+			(function() {
+			  'use strict';
+			  window.addEventListener('load', function() {
+			    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+			    var forms = document.getElementsByClassName('needs-validation');
+			    // Loop over them and prevent submission
+			    var validation = Array.prototype.filter.call(forms, function(form) {
+			      form.addEventListener('submit', function(event) {
+			        if (form.checkValidity() === false) {
+			          event.preventDefault();
+			          event.stopPropagation();
+			        }
+			        form.classList.add('was-validated');
+			      }, false);
+			    });
+			  }, false);
+			})();
+		</script>
+	</div>
+
+{% endblock %}
+
+
