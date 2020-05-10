@@ -6,6 +6,9 @@ from django.urls import re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin_settings_empl/', views.admin_settings_empl),
+    path('admin_new_empl/', views.admin_new_empl),
+    path('admin_settings_dep/', views.admin_settings_dep),
     path('', views.index, name='main_page'),    
     path('contacts/', views.contacts, name='contacts'),
     path('portfolio/', views.portfolio, name='portfolio'),

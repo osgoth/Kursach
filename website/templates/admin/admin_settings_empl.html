@@ -1,0 +1,85 @@
+{% extends 'bare.html' %}
+{% load static %}
+{% block content %}	
+  
+  	<div class="container d-flex mt-5">
+
+  		<!-- Right column -->
+	    <div class="col-md-3 text-center" id="sidebar-wrapper">
+	        <div class="sidebar-heading mt-2 mb-2"><h5>Админ настройки</h5></div>
+	        <div class="list-group list-group-flush">
+	        	<a href="/admin_settings_empl/" class="list-group-item list-group-item-action bg-light dropdown-toggle" data-toggle="dropdown">Работники</a>
+	              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+	                <a class="dropdown-item" href="/admin_new_empl/">Новый сотрудник</a>
+	                <a class="dropdown-item" href="/admin_settings_empl/">Штаб</a>
+	              </div>
+		        <!-- <a href="/admin_settings_dep/" class="list-group-item list-group-item-action bg-light">Департаменты</a> -->
+		        <a href="/logout/" class="list-group-item list-group-item-action bg-light">Выйти</a>
+	        </div>
+	    </div>
+
+		<!-- Orders -->
+	    <div class="container-fluid">
+	        <h2 class="mb-2">Работники: </h1>
+	        <!-- Active -->
+	        <div class="mt-4">
+	        	
+	          	
+	        	<table class="table mt-4">
+				  <thead>
+				    <tr>
+				      <th scope="col">Юзернейм</th>
+				      <th scope="col">Имя</th>
+				      <th scope="col">Фамилия</th>
+				      <th scope="col">Номер</th>
+				      <th scope="col">Департамент</th>
+				      <th scope="col">Должность</th>
+				      <th scope="col">Статус</th>
+				    </tr>
+				  </thead>
+				  {% for card in cards %}
+				  <tbody>
+				    <tr>
+				      <td class="text-dark">{{card.username}}</td>
+				      <td class="text-muted">{{card.name}}</td>
+				      <td class="text-muted">{{card.surname}}</td>
+				      <td class="text-muted">{{card.phone}}</td>
+				      <td class="text-muted">{{card.department}}</td>
+				      <td class="text-muted">{{card.position}}</td>
+				      <td class="text-success">{{card.status}}</td>
+				    </tr>
+				  </tbody>
+				  {% endfor %}
+				</table>
+				
+	        </div>
+	        <hr>
+
+	    </div>
+
+		<!-- validation Script -->
+		<script>
+			// Example starter JavaScript for disabling form submissions if there are invalid fields
+			(function() {
+			  'use strict';
+			  window.addEventListener('load', function() {
+			    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+			    var forms = document.getElementsByClassName('needs-validation');
+			    // Loop over them and prevent submission
+			    var validation = Array.prototype.filter.call(forms, function(form) {
+			      form.addEventListener('submit', function(event) {
+			        if (form.checkValidity() === false) {
+			          event.preventDefault();
+			          event.stopPropagation();
+			        }
+			        form.classList.add('was-validated');
+			      }, false);
+			    });
+			  }, false);
+			})();
+		</script>
+	</div>
+
+{% endblock %}
+
+

@@ -2,6 +2,14 @@ from django.db import models
 from datetime import datetime, date
 
 
+gender_choise = [('male','мужской'),('female','женский')]
+Categories = [('internet','internet'), ('outdoor','outdoor'), ('indoor','indoor'), ('transport','transport'), ('media','media'), ('polygraphy','polygraphy')]
+Types = [('targeting', 'targeting'),('banners', 'banners'),('instagram', 'instagram'),('youtube', 'youtube'), ('website','website'),
+         ('arch', 'arch'),('poster', 'poster'),('backlight', 'backlight'),('billboard', 'billboard'), ('citylight','citylight'), ('scroll','scroll'),
+         ('university', 'university'),('shopping center', 'shopping center'),('cinema', 'cinema'),('elevator', 'elevator'), ('parking','parking'),
+         ('bus', 'bus'),('trolleybus', 'trolleybus'),('tram', 'tram'),('autobrending', 'autobrending'), ('train','train'),
+         ('tv', 'tv'),('radio', 'radio'),('video', 'video'),('photo', 'photo'),
+         ('newspaper', 'newspaper'),('flyer', 'flyer'),('bussiness card', 'bussiness card'),('sticker', 'sticker'), ('calendar','calendar') ]
 
 
 class Customers(models.Model):
@@ -10,7 +18,7 @@ class Customers(models.Model):
     surname = models.CharField(max_length = 50, null=True)
     email = models.EmailField(max_length = 50, unique = True)
     birthday = models.DateField(null=True)
-    gender = models.BooleanField(null=True)
+    gender = models.CharField(max_length = 15, choices = gender_choise, null=True)
     phone = models.CharField(max_length = 13, unique = True, null=True)    
     reg_date = models.DateField()
 
@@ -48,15 +56,16 @@ class Departments(models.Model):
 
 
 class Employee(models.Model):
+    username = models.CharField(max_length = 50, unique = True, null=False)
     department = models.ForeignKey(Departments, on_delete=models.CASCADE)
     name = models.CharField(max_length = 50)
     surname = models.CharField(max_length = 50)
     email = models.EmailField(max_length = 50, unique = True)
     birthday = models.DateField()
-    gender = models.BooleanField()
+    gender = models.CharField(max_length = 15, choices = gender_choise, default='мужской')
     phone = models.CharField(max_length = 13, unique = True)
     position = models.CharField(max_length =50)
-    status = models.BooleanField()    
+    status = models.CharField(max_length =50, default='active')  
     reg_date = models.DateField()
     
     def __unicode__(self):
@@ -71,15 +80,6 @@ class Employee(models.Model):
         db_table="Employee"
         managed = True
 
-
-
-Categories = [('internet','internet'), ('outdoor','outdoor'), ('indoor','indoor'), ('transport','transport'), ('media','media'), ('polygraphy','polygraphy')]
-Types = [('targeting', 'targeting'),('banners', 'banners'),('instagram', 'instagram'),('youtube', 'youtube'), ('website','website'),
-         ('arch', 'arch'),('poster', 'poster'),('backlight', 'backlight'),('billboard', 'billboard'), ('citylight','citylight'), ('scroll','scroll'),
-         ('university', 'university'),('shopping center', 'shopping center'),('cinema', 'cinema'),('elevator', 'elevator'), ('parking','parking'),
-         ('bus', 'bus'),('trolleybus', 'trolleybus'),('tram', 'tram'),('autobrending', 'autobrending'), ('train','train'),
-         ('tv', 'tv'),('radio', 'radio'),('video', 'video'),('photo', 'photo'),
-         ('newspaper', 'newspaper'),('flyer', 'flyer'),('bussiness card', 'bussiness card'),('sticker', 'sticker'), ('calendar','calendar') ]
 
 
 class Services(models.Model):
