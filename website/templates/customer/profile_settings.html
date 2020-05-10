@@ -57,12 +57,12 @@
 
         <!-- Gender -->
         <div class="form-group">
-            <label for="exampleFormControlSelect1" required name="gender">
+            <label for="exampleFormControlSelect1" required>
                 <h5>Пол</h5>
             </label>
-            <select class="form-control form-control-sm">
-                <option>Мужской</option>
-                <option>Женский</option>
+            <select name="gender" class="form-control form-control-sm">
+                <option {% if user.gender == "Мужской"%}selected{% endif %}>Мужской</option>
+                <option {% if user.gender == "Мужской"%}selected{% endif %}>Женский</option>
             </select>
         </div>
 
@@ -73,13 +73,13 @@
             </label>
             <div class="form-row">
                 <div class="col-4">
-                    <input type="text" class="form-control" placeholder="День" name="day">
+                    <input type="text" id="day" class="form-control" placeholder="День" name="day" value="{{day}}">
                 </div>
                 <div class="col-4">
-                    <input type="text" class="form-control" placeholder="Месяц" nasme="month">
+                    <input type="text" id="month" class="form-control" placeholder="Месяц" name="month" value="{{month}}">
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Год" name="year">
+                    <input type="text" id="year" class="form-control" placeholder="Год" name="year" value="{{year}}">
                 </div>
             </div>
 
@@ -118,11 +118,6 @@
                 });
             }, false);
         })();
-		$(document).ready(function(){
-  			$("p").click(function(){
-    		$(this).hide();
-  			});
-		});
     </script>
 </div>
 

@@ -26,15 +26,17 @@ def portfolio(request):
 
 
 def admin_settings_dep(request):
-	return render(request, 'admin/admin_settings_dep.html')
+    return render(request, "admin/admin_settings_dep.html")
+
 
 def admin_settings_empl(request):
-	cards = Employee.objects.all()		
-	context = {'cards': cards}
-	return render(request, 'admin/admin_settings_empl.html', context)
+    cards = Employee.objects.all()
+    context = {"cards": cards}
+    return render(request, "admin/admin_settings_empl.html", context)
+
 
 def admin_new_empl(request):
-	return render(request, 'admin/admin_new_empl.html')
+    return render(request, "admin/admin_new_empl.html")
 
 
 def logout_view(request):
@@ -120,14 +122,19 @@ def profile_settings(request):
 
     user = Customers.objects.get(username=username)
     if request.method == "GET":
-        return render(request, "customer/profile_settings.html", context={"user": user})
+        day = user.birthday.strftime("%d")
+        year = user.birthday.strftime("%Y")
+        month = user.birthday.strftime("%m")
+        check_year = datetime.now().strftime("%Y")
+        check_month = datetime.now().strftime("%m")
+
+        return render(
+            request,
+            "customer/profile_settings.html",
+            context={"user": user, "day": day, "month": month, "year": year},
+        )
     if request.method == "POST":
         user.update(request.POST)
-
-        # form = ProfileChanges(data=request.POST)
-        # if form.is_valid():
-        #     user = form.save()
-
         return redirect(profile_settings)
 
 
@@ -136,9 +143,10 @@ def profile_orders(request):
 
 
 def employee_profile(request):
-	email = request.user.email
-	EmployeeInfo = Employee.objects.filter(email=email)
-	return render(request, 'employee/employee_profile.html')
+    email = request.user.email
+    EmployeeInfo = Employee.objects.filter(email=email)
+    return render(request, "employee/employee_profile.html")
+
 
 def employee_requests(request):
     return render(request, "employee/employee_requests.html")

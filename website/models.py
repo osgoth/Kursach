@@ -2,7 +2,7 @@ from django.db import models
 from datetime import datetime, date
 
 
-gender_choise = [('male','мужской'),('female','женский')]
+gender_choise = [("male", "мужской"), ("female", "женский")]
 Categories = [
     ("internet", "internet"),
     ("outdoor", "outdoor"),
@@ -44,6 +44,7 @@ Types = [
     ("calendar", "calendar"),
 ]
 
+
 class Customers(models.Model):
     username = models.CharField(max_length=50, unique=True, null=False)
     name = models.CharField(max_length=50, null=True)
@@ -51,7 +52,7 @@ class Customers(models.Model):
     email = models.EmailField(max_length=50, unique=True)
     birthday = models.DateField(null=True)
     gender = models.CharField(max_length = 15, choices = gender_choise, default="male")
-    phone = models.CharField(max_length = 13, unique = True, null=True)    
+    phone = models.CharField(max_length = 13, unique = True, null=True)  
     reg_date = models.DateField()
 
     def __unicode__(self):
@@ -71,6 +72,7 @@ class Customers(models.Model):
             for obkey in dict(self.__dict__):
                 if pkey == obkey:
                     setattr(self, pkey, post[pkey])
+        self.birthday = date(int(post["year"]), int(post["month"]), int(post["day"]))
         self.save()
 
 
@@ -93,7 +95,7 @@ class Departments(models.Model):
 
 
 class Employee(models.Model):
-    username = models.CharField(max_length = 50, unique = True, null=False)
+    username = models.CharField(max_length=50, unique=True, null=False)
     department = models.ForeignKey(Departments, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
@@ -102,7 +104,7 @@ class Employee(models.Model):
     gender = models.CharField(max_length = 15, choices = gender_choise, default="male")
     phone = models.CharField(max_length = 13, unique = True)
     position = models.CharField(max_length =50)
-    status = models.CharField(max_length =50, default='active')  
+    status = models.CharField(max_length =50, default='active')
     reg_date = models.DateField()
 
     def __unicode__(self):
@@ -116,7 +118,6 @@ class Employee(models.Model):
         verbose_name_plural = "Employee"
         db_table = "Employee"
         managed = True
-
 
 
 class Services(models.Model):
