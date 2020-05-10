@@ -18,13 +18,13 @@
 
       <!-- Description -->
       <div class="container-fluid">
-        <h2 class="mb-2">Алексей Марковский</h2><hr> 
-        <p>Пол: <a class="text-muted">мужской</a></p>
-        <p>День рождения: <a class="text-muted">16.01.1999</a></p>
-        <p>Почта: <a class="text-muted">almarka03@gmail.com</a></p>
+        <h2 class="mb-2">{{user.name}} {{user.surname}}</h2><hr> 
+        <p>Пол: <a class="text-muted">{{user.gender}}</a></p>
+        <p>День рождения: <a class="text-muted">{{user.birthday}}</a></p>
+        <p>Почта: <a class="text-muted">{{user.email}}</a></p>
         <p>Город: <a class="text-muted">Украина, Одесса</a></p>
-        <p>Номер телефона: <a class="text-muted">+380952793306</a></p>
-        <p>Дата регистрации: <a class="text-muted">11.22.2019</a></p>
+        <p>Номер телефона: <a class="text-muted">{{user.phone}}</a></p>
+        <p>Дата регистрации: <a class="text-muted">{{user.reg_date}}</a></p>
       </div>
 
   </div>

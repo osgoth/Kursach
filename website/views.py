@@ -110,7 +110,10 @@ def sign_up(request):
 
 
 def profile(request):
-    return render(request, "customer/profile.html")
+    username = request.user.username
+    user = Customers.objects.get(username=username)
+    context = {"user": user}
+    return render(request, "customer/profile.html", context)
 
 
 @csrf_protect

@@ -51,8 +51,8 @@ class Customers(models.Model):
     surname = models.CharField(max_length=50, null=True)
     email = models.EmailField(max_length=50, unique=True)
     birthday = models.DateField(null=True)
-    gender = models.CharField(max_length=15, choices=gender_choise, default="male")
-    phone = models.CharField(max_length=13, unique=True, null=True)
+    gender = models.CharField(max_length = 15, choices = gender_choise, default="male")
+    phone = models.CharField(max_length = 13, unique = True, null=True)  
     reg_date = models.DateField()
 
     def __unicode__(self):
@@ -101,10 +101,10 @@ class Employee(models.Model):
     surname = models.CharField(max_length=50)
     email = models.EmailField(max_length=50, unique=True)
     birthday = models.DateField()
-    gender = models.CharField(max_length=15, choices=gender_choise, default="мужской")
-    phone = models.CharField(max_length=13, unique=True)
-    position = models.CharField(max_length=50)
-    status = models.CharField(max_length=50, default="active")
+    gender = models.CharField(max_length = 15, choices = gender_choise, default="male")
+    phone = models.CharField(max_length = 13, unique = True)
+    position = models.CharField(max_length =50)
+    status = models.CharField(max_length =50, default='active')
     reg_date = models.DateField()
 
     def __unicode__(self):
