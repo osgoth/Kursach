@@ -5,14 +5,15 @@ from datetime import datetime, date
 
 
 class Customers(models.Model):
-    name = models.CharField(max_length = 50)
-    surname = models.CharField(max_length = 50)
+    username = models.CharField(max_length = 50, unique = True, null=False)
+    name = models.CharField(max_length = 50, null=True)
+    surname = models.CharField(max_length = 50, null=True)
     email = models.EmailField(max_length = 50, unique = True)
-    birthday = models.DateField()
-    gender = models.BooleanField()
-    phone = models.CharField(max_length = 13, unique = True)    
+    birthday = models.DateField(null=True)
+    gender = models.BooleanField(null=True)
+    phone = models.CharField(max_length = 13, unique = True, null=True)    
     reg_date = models.DateField()
-    
+
     def __unicode__(self):
         return self.id
 

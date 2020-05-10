@@ -68,16 +68,13 @@ def sign_in(request):
 	return render(request, 'customer/sign_in.html', {'form':form})
 
 def sign_up(request):
-	print(request.method)
 	if request.method == 'POST':
 		request.POST._mutable = True
 		email = request.POST['email']
+		username = request.POST['username']
+		new_user = Customers.objects.create(username=username, email=email, reg_date=datetime.now())
 		del request.POST['email']
-
-		print(request.POST)
 		form = UserCreationForm(request.POST)
-		print(form.is_valid())
-
 
 		if form.is_valid():
 			user = form.save()
@@ -97,7 +94,8 @@ def profile(request):
 
 
 def profile_settings(request):
-	data = Customers.objects.filter(email=email)
+	username = request.user.username
+	data = Customers.objects.filter(username=username)
 	if request.method == 'POST':
 		form = ProfileChanges(data=request.POST)
 		if form.is_valid():
