@@ -29,7 +29,7 @@
 
 		<!-- Orders -->
 	    <div class="container-fluid">
-	        <h2 class="mb-2">Завершенные заявки: </h1>
+	        <h2 class="mb-2">Проекты: </h1>
 	        <!-- Active -->
 	        <div class="mt-4">
 	        	
@@ -44,7 +44,6 @@
 				      <th scope="col">Описание</th>
 				      <th scope="col">Цена</th>
 				      <th scope="col">Дедлайн</th>
-				      <th></th>
 				    </tr>
 				  </thead>
 				  {% for card in context %}
@@ -57,7 +56,6 @@
 				      <td class="text-muted">{{card.description}}</td>
 				      <td class="text-muted">{{card.price}}</td>
 				      <td class="text-muted">{{card.final_date}}</td>
-				      <td><a class="btn btn-outline-secondary" href="/requests/settings/{{card.deal_id}}">Настройка</a></td>
 				    </tr>
 				  </tbody>
 				  {% endfor %}

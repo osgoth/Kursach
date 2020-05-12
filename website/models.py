@@ -50,7 +50,7 @@ class Customers(models.Model):
     name = models.CharField(max_length=50, null=True)
     surname = models.CharField(max_length=50, null=True)
     email = models.EmailField(max_length=50, unique=True)
-    birthday = models.DateField(null=True)
+    birthday = models.DateField(null=True, default=datetime.now())
     gender = models.CharField(max_length = 15, choices = gender_choise, default="male")
     phone = models.CharField(max_length = 13, unique = True, null=True)  
     reg_date = models.DateField()

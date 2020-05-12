@@ -32,6 +32,10 @@ def logout_view(request):
     return redirect("main_page")
 
 
+def conditions(request):
+    return render(request, "conditions.html")
+
+
 def services(request, category=None, types=None):
     if types:
         cards = Services.objects.filter(types=types.replace("_", " "))
@@ -48,10 +52,6 @@ def service_detail(request, service_id=None):
     cards = Services.objects.filter(id=service_id)
     context = {"cards": cards, 'res': request}
     return render(request, "service_detail.html", context)
-
-
-def basket(request):
-    return render(request, "basket.html")
 
 
 def confirm(request, service_id=None):
@@ -72,9 +72,6 @@ def confirm(request, service_id=None):
     
     return render(request, "confirm.html")
 
-
-def conditions(request):
-    return render(request, "conditions.html")
 
 
 @csrf_protect
@@ -130,29 +127,35 @@ def profile_settings(request):
         month = user.birthday.strftime("%m")
         check_year = datetime.now().strftime("%Y")
         check_month = datetime.now().strftime("%m")
+        context = {"user": user, "day": day, "month": month, "year": year}
 
-        return render(
-            request,
-            "customer/profile_settings.html",
-            context={"user": user, "day": day, "month": month, "year": year},
-        )
+        return render(request, "customer/profile_settings.html", context=context)
+
     if request.method == "POST":
         user.update(request.POST)
         return redirect(profile_settings)
 
 
 def profile_orders(request):
-    return render(request, "customer/profile_orders.html")
+    customer = Customers.objects.get(username=request.user.username)
+    cursor.execute(f"""
+        SELECT s.name, s.id as service_id, r.id as request_id, d.status, d.price, d.final_date
+        FROM "Requests" AS r
+        JOIN "Deals" AS d ON r.deal_id = d.id
+        JOIN "Services" AS s ON r.service_id = s.id 
+        where r.customer_id = {customer.id};""")
 
+    context = dictfetchall(cursor)
+    print(context)
+    context = {'context': context}
+    return render(request, "customer/profile_orders.html", context)
 
-
-def admin_settings_dep(request):
-    return render(request, "admin/admin_settings_dep.html")
 
 def admin_settings_empl(request):
     cards = Employee.objects.all()
     context = {"cards": cards}
     return render(request, "admin/admin_settings_empl.html", context)
+
 
 @csrf_protect
 def admin_new_empl(request):
@@ -194,55 +197,101 @@ def employee_profile(request):
     return render(request, "employee/employee_profile.html", context)
 
 
-def employee_requests(request):
-    return render(request, "employee/employee_requests.html")
-
-
-def employee_projects(request):
-    return render(request, "employee/employee_projects.html")
-
-
-def employee_sign_in(request):
-    return render(request, "employee/employee_sign_in.html")
-
-
-
 
 def requests_active(request):
-    cursor.execute("""
+    empl = Employee.objects.get(username=request.user.username)
+    cursor.execute(f"""
         SELECT c.email, s.id, r.id as request_id, d.status, d.price, d.final_date, d.description, d.id as deal_id FROM "Deals" AS d
         JOIN "Requests" AS r ON r.deal_id = d.id
         JOIN "Customers" AS c ON r.customer_id = c.id
-        JOIN "Services" AS s ON r.service_id = s.id;""")
+        JOIN "Services" AS s ON r.service_id = s.id where not d.status = 'done' and s.department_id = {empl.department_id};""")
 
     context = dictfetchall(cursor)
     context = {'context': context}
     return render(request, "employee/manager/requests_active.html", context)
 
 def requests_done(request):
-    return render(request, "employee/manager/requests_done.html")
+    empl = Employee.objects.get(username=request.user.username)
+    cursor.execute(f"""
+        SELECT c.email, s.id, r.id as request_id, d.status, d.price, d.final_date, d.description, d.id as deal_id FROM "Deals" AS d
+        JOIN "Requests" AS r ON r.deal_id = d.id
+        JOIN "Customers" AS c ON r.customer_id = c.id
+        JOIN "Services" AS s ON r.service_id = s.id where  d.status = 'done' and s.department_id = {empl.department_id};;""")
+
+    context = dictfetchall(cursor)
+    context = {'context': context}
+    return render(request, "employee/manager/requests_done.html", context)
+
+
+
+
+
+def projects_active(request):
+    empl = Employee.objects.get(username=request.user.username)
+    cursor.execute(f"""
+        SELECT c.email, s.id, r.id as request_id, d.status, d.price, d.final_date, d.description, d.id as deal_id FROM "Deals" AS d
+        JOIN "Requests" AS r ON r.deal_id = d.id
+        JOIN "Customers" AS c ON r.customer_id = c.id
+        JOIN "Services" AS s ON r.service_id = s.id where not d.status = 'done' and d.employee_id = {empl.id};""")
+
+    context = dictfetchall(cursor)
+    context = {'context': context}
+    return render(request, "employee/projects_active.html", context)
+
+def projects_done(request):
+    empl = Employee.objects.get(username=request.user.username)
+    cursor.execute(f"""
+        SELECT c.email, s.id, r.id as request_id, d.status, d.price, d.final_date, d.description, d.id as deal_id FROM "Deals" AS d
+        JOIN "Requests" AS r ON r.deal_id = d.id
+        JOIN "Customers" AS c ON r.customer_id = c.id
+        JOIN "Services" AS s ON r.service_id = s.id where d.status = 'done' and d.employee_id = {empl.id};""")
+
+    context = dictfetchall(cursor)
+    context = {'context': context}
+    return render(request, "employee/projects_done.html", context)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def requests_settings(request, deal_id=None):
     if request.method == "POST":
-        deal = Deals.objects.get(id=deal_id)
+        deal = Deals.objects.get(id=deal_id)        
+        employee = Employee.objects.get(username=request.POST['employee'])
         deal.update(request.POST)
+        deal.employee_id = employee.id
+        deal.save()
         return redirect(requests_active)
 
     else:
         cursor.execute(f"""
-            SELECT c.email, s.id, s.name, r.id as request_id, d.status, d.price, d.final_date, d.description, d.id as deal_id FROM "Deals" AS d
+            SELECT c.email, s.id, s.name, s.department_id, r.id as request_id, d.status, d.price, d.final_date, d.description, d.id as deal_id FROM "Deals" AS d
             JOIN "Requests" AS r ON r.deal_id = d.id
             JOIN "Customers" AS c ON r.customer_id = c.id
             JOIN "Services" AS s ON r.service_id = s.id where d.id = {deal_id};""")
         context = dictfetchall(cursor)
 
         cursor.execute(f"""
-            select distinct e.name, e.surname, e.username from "Employee" as e 
-                join "Departments" as d  on e.department_id = d.id 
-                join "Services" as s on s.department_id = d.id where s.id = {deal_id};""")
+            select e.username from "Employee" as e
+            join "Departments" as d on e.department_id = d.id 
+            where d.id = {context[0]['department_id']};""")
         employees = dictfetchall(cursor)
 
-        context = {'context': context[0], 'empl': employees}    
+        deal = Deals.objects.get(id=deal_id)
+        if deal.employee_id:
+            emp_active = Employee.objects.get(id=deal.employee_id)
+        else:
+            emp_active = {'username':''}
+        context = {'context': context[0], 'empl': employees, 'emp_active': emp_active}    
         return render(request, "employee/manager/requests_settings.html", context)
 
 
