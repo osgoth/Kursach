@@ -12,7 +12,7 @@ urlpatterns = [
     path('', views.index, name='main_page'),    
     path('contacts/', views.contacts, name='contacts'),
     path('portfolio/', views.portfolio, name='portfolio'),
-    path('confirm/', views.confirm, name='confirm'),
+    path('confirm/<int:service_id>', views.confirm, name='confirm'),
     path('conditions/', views.conditions, name='conditions'),    
     path('basket/', views.basket, name='basket'), 
     path('logout/', views.logout_view, name='basket'),   
@@ -30,4 +30,8 @@ urlpatterns = [
     path('foremployee/', views.employee_profile, name='employee_profile'),
     path('foremployee/projects/', views.employee_projects, name='employee_projects'),
     path('foremployee/requests/', views.employee_requests, name='employee_requests'),
+
+    path('requests/active/', views.requests_active),
+    path('requests/done/', views.requests_done),
+    path('requests/settings/<int:deal_id>/', views.requests_settings, name='requests_settings'), 
 ]

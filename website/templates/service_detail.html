@@ -15,8 +15,11 @@
             <h4>от {{card.price}} грн</h4>
             <p class="card-text">{{card.description}}</p>
             <div class="mt-4 mb-4">        
-              <a class="btn btn-danger" href="/confirm">Заказать сразу</a>
-              <a class="btn btn-outline-secondary" href="/basket">Добавить в корзину</a>
+              {%if request.user.is_authenticated %}
+                <a class="btn btn-danger btn-lg" href="/confirm/{{card.id}}" >Заказать</a>
+              {% else %}
+                <a class="btn btn-danger btn-lg" href="/sign_in">Заказать</a>
+              {%endif%}
             </div>
       </div>
       {%endfor%}
