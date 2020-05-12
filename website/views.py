@@ -1,18 +1,14 @@
+from django.contrib.auth import logout, login, authenticate, update_session_auth_hash
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import Group
+from django.db import connection
+from datetime import datetime
 from .models import *
 from .forms import *
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import logout, login, authenticate, update_session_auth_hash
-from django.shortcuts import render, redirect, get_object_or_404
-from django.db import connection
-from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth.models import Group
-
-from datetime import datetime
 
 cursor = connection.cursor()
-
 
 def index(request):
     context = {"res": request}
@@ -57,11 +53,9 @@ def service_detail(request, service_id=None):
 def confirm(request, service_id=None):
     service = Services.objects.get(id=service_id)
     customer = Customers.objects.get(username=request.user.username)
-
     deal = Deals.objects.create(
         status ='processing'
         )
-
     requestt = Requests.objects.create(
         deal = deal,
         customer = customer,
@@ -69,9 +63,7 @@ def confirm(request, service_id=None):
         reg_date = datetime.now()
         )
 
-    
     return render(request, "confirm.html")
-
 
 
 @csrf_protect
@@ -210,6 +202,7 @@ def requests_active(request):
     context = {'context': context}
     return render(request, "employee/manager/requests_active.html", context)
 
+
 def requests_done(request):
     empl = Employee.objects.get(username=request.user.username)
     cursor.execute(f"""
@@ -221,9 +214,6 @@ def requests_done(request):
     context = dictfetchall(cursor)
     context = {'context': context}
     return render(request, "employee/manager/requests_done.html", context)
-
-
-
 
 
 def projects_active(request):
@@ -238,6 +228,7 @@ def projects_active(request):
     context = {'context': context}
     return render(request, "employee/projects_active.html", context)
 
+
 def projects_done(request):
     empl = Employee.objects.get(username=request.user.username)
     cursor.execute(f"""
@@ -249,18 +240,6 @@ def projects_done(request):
     context = dictfetchall(cursor)
     context = {'context': context}
     return render(request, "employee/projects_done.html", context)
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def requests_settings(request, deal_id=None):
@@ -295,7 +274,6 @@ def requests_settings(request, deal_id=None):
         return render(request, "employee/manager/requests_settings.html", context)
 
 
-# need for 'requests_active()' spirt
 def dictfetchall(cursor):
     "Return all rows from a cursor as a dict"
     columns = [col[0] for col in cursor.description]
