@@ -142,37 +142,18 @@ class Services(models.Model):
         managed = True
 
 
-class Requests(models.Model):
-    customer = models.ForeignKey(Customers, on_delete=models.CASCADE)
-    employee = models.ManyToManyField(Employee)
-    reg_date = models.DateField(max_length=50)
-
-    def __unicode__(self):
-        return self.id
-
-    def __str__(self):
-        return self.id
-
-    class Meta:
-        verbose_name = "Requests"
-        verbose_name_plural = "Requests"
-        db_table = "Requests"
-        managed = True
-
-
 class Deals(models.Model):
-    request = models.ForeignKey(Requests, on_delete=models.CASCADE)
-    service = models.ForeignKey(Services, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)
     status = models.CharField(max_length=50)
-    description = models.CharField(max_length=50)
-    price = models.CharField(max_length=100)
-    final_date = models.DateField()
+    description = models.CharField(max_length=50, null=True)
+    price = models.CharField(max_length=100, null=True)
+    final_date = models.DateField(null=True)
 
     def __unicode__(self):
-        return self.id
+        return str(self.id)
 
     def __str__(self):
-        return self.description
+        return str(self.id)
 
     class Meta:
         verbose_name = "Deals"
@@ -180,20 +161,29 @@ class Deals(models.Model):
         db_table = "Deals"
         managed = True
 
+    def update(self, post):
+        for pkey in post:
+            for obkey in dict(self.__dict__):
+                if pkey == obkey:
+                    setattr(self, pkey, post[pkey])
+        self.final_date = date(int(post["year"]), int(post["month"]), int(post["day"]))
+        self.save()
 
-class Chart(models.Model):
-    service = models.ForeignKey(Services, on_delete=models.CASCADE)
+
+class Requests(models.Model):
+    deal = models.ForeignKey(Deals, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customers, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=500)
+    service = models.ForeignKey(Services, on_delete=models.CASCADE)
+    reg_date = models.DateField(max_length=50)
 
     def __unicode__(self):
-        return self.id
+        return str(self.id)
 
     def __str__(self):
-        return self.comment
+        return str(self.id)
 
     class Meta:
-        verbose_name = "Chart"
-        verbose_name_plural = "Chart"
-        db_table = "Chart"
+        verbose_name = "Requests"
+        verbose_name_plural = "Requests"
+        db_table = "Requests"
         managed = True

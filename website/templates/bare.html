@@ -53,11 +53,12 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown">{{user.username}}</a>
                     <ul class="dropdown-menu">
 
+
                       {%if request.user.groups.all.0|stringformat:"s" == "Admins" %}
                         <li><a class="dropdown-item" href="/admin_settings_empl/">Настройки</a></li>
                         <li><a class="dropdown-item" href="/admin/">Меню</a></li>
 
-                      {%elif request.user.groups.all.0|stringformat:"s" == "Employees" %}
+                      {%elif request.user.groups.all.0|stringformat:"s" == "Employees" or request.user.groups.all.0|stringformat:"s" == "Managers" %}
                         <li><a class="dropdown-item" href="/foremployee/">Меню</a></li>
 
                       {%else%}
