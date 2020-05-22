@@ -50,7 +50,7 @@ class Customers(models.Model):
     name = models.CharField(max_length=50, null=True)
     surname = models.CharField(max_length=50, null=True)
     email = models.EmailField(max_length=50, unique=True)
-    birthday = models.DateField(null=True)
+    birthday = models.DateField(null=True, default=datetime.now())
     gender = models.CharField(max_length = 15, choices = gender_choise, default="male")
     phone = models.CharField(max_length = 13, unique = True, null=True)  
     reg_date = models.DateField()
@@ -72,7 +72,8 @@ class Customers(models.Model):
             for obkey in dict(self.__dict__):
                 if pkey == obkey:
                     setattr(self, pkey, post[pkey])
-        self.birthday = date(int(post["year"]), int(post["month"]), int(post["day"]))
+        datearr = post['date'].split('/')
+        self.birthday = date(int(datearr[2]), int(datearr[0]), int(datearr[1]))
         self.save()
 
 
@@ -166,7 +167,8 @@ class Deals(models.Model):
             for obkey in dict(self.__dict__):
                 if pkey == obkey:
                     setattr(self, pkey, post[pkey])
-        self.final_date = date(int(post["year"]), int(post["month"]), int(post["day"]))
+        datearr = post['date'].split('/')
+        self.birthday = date(int(datearr[2]), int(datearr[0]), int(datearr[1]))
         self.save()
 
 

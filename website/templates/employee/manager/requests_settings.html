@@ -2,6 +2,9 @@
 {% load static %}
 {% block content %}
 
+
+
+
 <div class="container d-flex mt-5">
 
     <!-- Right column -->
@@ -20,8 +23,8 @@
             <div class="dropdown">
               <a href="#" class="list-group-item list-group-item-action bg-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Проекты</a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Мои проекты</a>
-                <a class="dropdown-item" href="#">Завершенные проекты</a>
+                <a class="dropdown-item" href="/projects/active/">Мои проекты</a>
+                <a class="dropdown-item" href="/projects/done/">Завершенные проекты</a>
               </div>
             </div>
           </div>
@@ -35,7 +38,7 @@
             <div class="col-md-8 mb-3 mt-5">
                 <h4> Заказчик: <a class="text-muted">{{context.email}}</a></h4>
             </div>
-            <div class="col-md-4 mb-3  mt-5">
+            <div class="col-md-3 mb-3  mt-5">
                 <h4> ID заявки: <a class="text-muted">{{context.request_id}}</a></h4>
             </div>
         </div>
@@ -47,64 +50,92 @@
 
         <!-- Phone -->
         <div class="form-group">
-            <label for="exampleFormControlSelect1" required>
-                <h5>Статус</h5>
-            </label>
-            <select name="status" class="form-control form-control-sm">
-                <option selected>inprocess</option>
-                <option>postponed</option>
-                <option>done</option>
-                <option>crashed</option>
-            </select>
+            {% if context.status == 'done'%}
+                <h4> Статус: <a class="text-muted">{{context.status}}</a></h4>
+            {% else %}
+                <label for="exampleFormControlSelect1" required>
+                    <h5>Статус</h5>
+                </label>            
+                <select name="status" class="form-control form-control-sm">
+                    <option selected>inprocess</option>
+                    <option>postponed</option>
+                    <option>done</option>
+                    <option>crashed</option>
+                </select>
+            {% endif %}
         </div>
 
         <!-- Employee -->
         <div class="form-group">
-            <label for="exampleFormControlSelect1" required>
-                <h5>Сотрудник</h5>
-            </label>
-            <select name="employee" class="form-control form-control-sm">
-                {% for x in empl %}
-                <option>{{x.username}}</option>
-                {%endfor%}
-            </select>
+            {% if context.status == 'done'%}
+                <h4> Сотрудник: <a class="text-muted">{{emp_active.username}}</a></h4>
+            {% else %}
+                <label for="exampleFormControlSelect1" required>
+                    <h5>Сотрудник</h5>
+                </label>
+                <select name="employee" class="form-control form-control-sm">
+                    {% for x in empl %}
+                    <option>{{x.username}}</option>
+                    {%endfor%}
+                </select>
+            {% endif %}
         </div>
 
         <!-- Gender -->
         <div class="form-group">
-            <label for="validationTextarea">Описание</label>
-            <textarea class="form-control " id="validationTextarea" placeholder="Напишите комментарии и заметки к заказу" name="description"></textarea>
+            {% if context.status == 'done'%}
+                <h4> Описание: <a class="text-muted">{{context.description}}</a></h4>
+            {% else %}
+                <label for="validationTextarea"><h4>Описание</h4></label>
+                <textarea class="form-control " id="validationTextarea" placeholder="Напишите комментарии и заметки к заказу" name="description"></textarea>
+            {% endif %}
         </div>
 
-        <!-- Gender -->
+        <!-- Price -->
         <div class="form-group">
-            <label for="exampleFormControlSelect1" required>
-                <h5>Цена</h5>
-                <input type="text" class="form-control" id="validationCustom02" name="price" placeholder="Сумма грн">
-            </label>
+            {% if context.status == 'done'%}
+                <h4> Цена: <a class="text-muted">{{context.price}}</a></h4>
+            {% else %}
+                <label for="exampleFormControlSelect1" required>
+                    <h5>Цена</h5>
+                    <input type="text" class="form-control" id="validationCustom02" name="price" placeholder="Сумма грн">
+                </label>
+            {% endif %}
         </div>
 
         <!-- Birthday -->
         <div class="form-group mt-3">
-            <label for="exampleFormControlSelect1">
-                <h5>Дэдлайн</h5>
-            </label>
-            <div class="form-row">
-                <div class="col-4">
-                    <input type="text" id="day" class="form-control" placeholder="День" name="day" value="{{day}}">
+            {% if context.status == 'done'%}
+                <h4> Дэдлайн: <a class="text-muted">{{context.final_date}}</a></h4>
+            {% else %}
+                <div class="bootstrap-iso">
+                 <div class="container-fluid">
+                  <div class="row">
+                    <!-- Form code begins -->
+                    <form method="post">
+                      <div class="form-group"> <!-- Date input -->
+                        <label class="control-label" for="date" style="font-size: 18px">Дата окончания</label>
+                        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+                      </div>
+                     </form>
+                     <!-- Form code ends --> 
+                  </div>    
+                 </div>
                 </div>
-                <div class="col-4">
-                    <input type="text" id="month" class="form-control" placeholder="Месяц" name="month" value="{{month}}">
-                </div>
-                <div class="col">
-                    <input type="text" id="year" class="form-control" placeholder="Год" name="year" value="{{year}}">
-                </div>
-            </div>
+            {% endif %}
 
-            <!-- Submitting -->
-            <div class="form-group mt-5">
-                <button class="btn btn-primary" type="submit">Сохранить</button>
-            </div>
+            {% if context.status != 'done'%}
+                <!-- Submitting -->
+                <div class="form-group mt-5">
+                    <button class="btn btn-primary" type="submit">Сохранить</button>
+                </div>
+            {% endif %}
+        </div>
+
+        
+
+        
+            
     </form>
 
     <!-- validation Script -->
