@@ -82,30 +82,30 @@
 
 
 			<!-- Birthday -->
-			<div class="form-group mt-3">
-			    <label for="exampleFormControlSelect1"><h5>Дата рождения</h5></label>
-				<div class="form-row">
-				    <div class="col-4">
-				      <input type="text" class="form-control" placeholder="День" name="day">
-				    </div>
-				    <div class="col-4">
-				      <input type="text" class="form-control" placeholder="Месяц"  name="month">
-				    </div>
-				    <div class="col">
-				      <input type="text" class="form-control" placeholder="Год"  name="year">
-			    </div>
-			</div>
+			<div class="bootstrap-iso">
+                 <div class="container-fluid">
+                  <div class="row">
+                    <!-- Form code begins -->
+                    <form method="post">
+                      <div class="form-group"> <!-- Date input -->
+                        <label class="control-label" for="date" style="font-size: 18px">Дата рождения</label>
+                        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+                      </div>
+                     </form>
+                     <!-- Form code ends --> 
+                  </div>    
+                 </div>
 			<hr>
 
 			<!-- PASSWORDS -->
-			<div class="form-group mt-5">
+			<div class="form-group mt-3">
 				<div class="form-label-group">
 		            <input type="password" name="password1" required id="id_password1" class="form-control" required>
-		            <label for="id_password1">Пароль:</label>
+		            <label class="mt-2" for="id_password1">Пароль:</label>
 		        </div>
-		        <div class="form-label-group">
+		        <div class="form-label-group mt-2">
 		            <input type="password" name="password2" required id="id_password2" class="form-control" required>
-		            <label for="id_password2">Подтверждение пароля:</label>
+		            <label class="mt-2" for="id_password2">Подтверждение пароля:</label>
 		        </div>
 		    </div>
 
