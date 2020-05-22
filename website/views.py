@@ -78,6 +78,8 @@ def sign_in(request):
             # происходит авторизация
             user = form.get_user()            
             login(request, user)
+            if "Employees" or "Managers" in request.user.groups.all()[0]:
+                return redirect("/foremployee")
             return redirect(index)
     else:
         form = AuthenticationForm()

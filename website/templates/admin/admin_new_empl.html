@@ -26,19 +26,31 @@
 			<!-- Name, Surname, Username -->
 			<div class="form-row">
 				<div class="col-md-4 mb-3">
-			      <label for="validationCustom01"><h5>Юзернейм</h5></label>
-			      <input type="text" class="form-control" id="validationCustom00" name="username" placeholder="Юзернейм">
-			      <div class="valid-feedback">Отлично!</div>
+			      <label for="validationCustom0"><h5>Юзернейм</h5></label>
+			      <input type="text" 
+				  			class="form-control" 
+				  			id="validationCustom0" 
+							name="username" 
+							placeholder="Юзернейм" 
+							maxlength="20" required>
 			    </div>
 			    <div class="col-md-4 mb-3">
 			      <label for="validationCustom01"><h5>Имя</h5></label>
-			      <input type="text" class="form-control" id="validationCustom01" name="name" placeholder="Имя">
-			      <div class="valid-feedback">Отлично!</div>
+			      <input type="text" 
+				  			class="form-control" 
+							id="validationCustom01" 
+							name="name" 
+							placeholder="Имя" 
+							maxlength="20" required>
 			    </div>
 			    <div class="col-md-4 mb-3">
 			      <label for="validationCustom02"><h5>Фамилия</h5></label>
-			      <input type="text" class="form-control" id="validationCustom02" name="surname"  placeholder="Фамилия">
-			      <div class="valid-feedback">Отлично!</div>
+			      <input type="text" 
+				  			class="form-control"
+							id="validationCustom02"
+							name="surname"
+							placeholder="Фамилия"
+							maxlength="20" required>
 			    </div>
 			  </div>
 			  <hr>
@@ -46,9 +58,13 @@
 			<!-- Position, Gender -->
 			<div class="form-row">
 				<div class="col-md-4 mb-3">
-			      <label for="validationCustom01"><h5>Должость</h5></label>
-			      <input type="text" class="form-control" id="validationCustom00" name="position" placeholder="должность" >
-			      <div class="valid-feedback">Отлично!</div>
+			      <label for="validationCustom00"><h5>Должость</h5></label>
+			      <input type="text" 
+				  			class="form-control"
+							id="validationCustom00"
+							name="position"
+							placeholder="должность"
+							maxlength="20" required>
 			    </div>
 			    <div class="col-md-4 mb-3">
 			        <label for="exampleFormControlSelect1" value="" required name="gender"><h5>Пол</h5></label>
@@ -63,21 +79,32 @@
 			      		{% for dep in departments %}
 				        <option>{{dep.name}}</option>
 				       	{% endfor %}
-					</select>	
-			      <div class="valid-feedback">Отлично!</div>
+					</select>
 			    </div>
 			  </div>
 
 			<!-- Email -->
 			<div class="form-group">
 			    <label for="exampleFormControlInput1"><h5>Почта</h5></label>
-			    <input type="email" class="form-control" id="exampleFormControlInput1" name="email" placeholder="email@gmail.com">
+			    <input type="email" 
+						class="form-control" 
+						id="exampleFormControlInput1" 
+						name="email" 
+						placeholder="email@gmail.com"
+						pattern = "^[a-zA-Z0-9.!#$%&'*+=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+						maxlength="60" required>
 			</div>
 
 			<!-- Phone -->
 			<div class="form-group">
-			    <label for="exampleFormControlInput1"><h5>Номер телефона</h5></label>
-			    <input type="phone" class="form-control" id="exampleFormControlInput1" name="phone" placeholder="+38023456789">
+			    <label for="exampleFormControlInput2"><h5>Номер телефона</h5></label>
+			    <input type="phone"
+						class="form-control"
+						id="exampleFormControlInput2"
+						name="phone"
+						placeholder="+38023456789"
+						pattern="\+[0-9]{9,12}"
+						maxlength="15" required>
 			</div>
 
 
@@ -100,13 +127,20 @@
 			<!-- PASSWORDS -->
 			<div class="form-group mt-3">
 				<div class="form-label-group">
-		            <input type="password" name="password1" required id="id_password1" class="form-control" required>
-		            <label class="mt-2" for="id_password1">Пароль:</label>
+					<label for="id_password1">Пароль:</label>
+		            <input type="password" 
+							name="password1"
+							id="id_password1"
+							class="form-control" required>
 		        </div>
-		        <div class="form-label-group mt-2">
-		            <input type="password" name="password2" required id="id_password2" class="form-control" required>
-		            <label class="mt-2" for="id_password2">Подтверждение пароля:</label>
+		        <div class="form-label-group">
+					<label for="id_password2">Подтверждение пароля:</label>
+		            <input type="password"
+							name="password2"
+							id="id_password2"
+							class="form-control" required>
 		        </div>
+				<p id="pw-match"></p>
 		    </div>
 
 			<!-- Submitting -->
@@ -124,15 +158,39 @@
 			    // Loop over them and prevent submission
 			    var validation = Array.prototype.filter.call(forms, function(form) {
 			      form.addEventListener('submit', function(event) {
-			        if (form.checkValidity() === false) {
-			          event.preventDefault();
-			          event.stopPropagation();
+			        if (form.checkValidity() === false || PasswordCheck() === false) {							
+						event.preventDefault();
+						event.stopPropagation();
 			        }
 			        form.classList.add('was-validated');
 			      }, false);
 			    });
 			  }, false);
 			})();
+
+			function PasswordCheck() {
+				var pw1 = document.getElementById('id_password1').value;
+				var pw2 = document.getElementById('id_password2').value;
+				passwordsEqual = (pw1 === pw2);
+				if (passwordsEqual === false) {
+					txt = "Пароли не совпадают";
+					document.getElementById("pw-match").innerHTML = txt;
+				}
+				return passwordsEqual;
+			}
+
+			window.onload = function myFunction() {
+				var txt = '<div class="valid-feedback">Отлично!</div>\
+				<div class="invalid-feedback">Нужно заполнить правильно</div>';
+
+				var classes = ["col-md-4 mb-3", "form-group"];
+				for (j = 0; j < classes.length; j++) {
+					var elements = document.getElementsByClassName(classes[j]);
+					for (i = 0; i < elements.length; i++) {
+						elements[i].innerHTML = elements[i].innerHTML + txt;
+					}
+				}
+			}
 		</script>
 	</div>
 
