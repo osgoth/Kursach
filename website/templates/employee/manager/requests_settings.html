@@ -2,6 +2,9 @@
 {% load static %}
 {% block content %}
 
+
+
+
 <div class="container d-flex mt-5">
 
     <!-- Right column -->
@@ -88,7 +91,7 @@
             {% endif %}
         </div>
 
-        <!-- Gender -->
+        <!-- Price -->
         <div class="form-group">
             {% if context.status == 'done'%}
                 <h4> Цена: <a class="text-muted">{{context.price}}</a></h4>
@@ -105,19 +108,19 @@
             {% if context.status == 'done'%}
                 <h4> Дэдлайн: <a class="text-muted">{{context.final_date}}</a></h4>
             {% else %}
-                <label for="exampleFormControlSelect1">
-                    <h5>Дэдлайн</h5>
-                </label>
-                <div class="form-row">
-                    <div class="col-4">
-                        <input type="text" id="day" class="form-control" placeholder="День" name="day" value="{{day}}">
-                    </div>
-                    <div class="col-4">
-                        <input type="text" id="month" class="form-control" placeholder="Месяц" name="month" value="{{month}}">
-                    </div>
-                    <div class="col">
-                        <input type="text" id="year" class="form-control" placeholder="Год" name="year" value="{{year}}">
-                    </div>
+                <div class="bootstrap-iso">
+                 <div class="container-fluid">
+                  <div class="row">
+                    <!-- Form code begins -->
+                    <form method="post">
+                      <div class="form-group"> <!-- Date input -->
+                        <label class="control-label" for="date" style="font-size: 18px">Дата окончания</label>
+                        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+                      </div>
+                     </form>
+                     <!-- Form code ends --> 
+                  </div>    
+                 </div>
                 </div>
             {% endif %}
 
@@ -128,6 +131,10 @@
                 </div>
             {% endif %}
         </div>
+
+        
+
+        
             
     </form>
 
