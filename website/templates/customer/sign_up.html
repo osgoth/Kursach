@@ -16,26 +16,50 @@
 
 	            <h5 class="card-title text-center font-weight-bold">Регистрация пользователя</h5>
 	            <form class="form-signin" method="post">
-	              {% csrf_token %}
+				  {% csrf_token %}
+				  <!-- Username -->
 	              <div class="form-label-group">
-	                <input type="text" name="username" maxlength="150" autofocus required id="id_username" class="form-control" required>
-	                <label for="id_username">Имя пользователя:</label>
+					<input type="text"
+							name="username" 
+							maxlength="30" 
+							autofocus 
+							id="id_username" 
+							class="form-control" required>
+					<label for="id_username">Имя пользователя:</label>
 	              </div>
-
+				  <!-- Email -->
 	              <div class="form-label-group">
-	                <input type="text" name="email" maxlength="150" autofocus required id="id_username" class="form-control" required>
-	                <label for="id_username">Почта:</label>
+					
+					<input type="email" 
+							name="email" 
+							maxlength="40" 
+							id="id_username"
+							pattern = "^[a-zA-Z0-9.!#$%&'*+=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+							class="form-control" required autofocus >
+							<label for="id_username">Почта:</label>
 	              </div>
-	              
-	              <hr>
+	              <!-- same emails = error-->
+				  <hr>
+				  <!-- Password-->
 	              <div class="form-label-group">
-	                <input type="password" name="password1" required id="id_password1" class="form-control" required>
+	                <input type="password" 
+							name="password1" 
+							id="id_password1"
+							maxlength="30" 
+							class="form-control" required>
 	                <label for="id_password1">Пароль:</label>
 	              </div>
-	              
+	              <!-- Confirm password -->
 	              <div class="form-label-group">
-	                <input type="password" name="password2" required id="id_password2" class="form-control" required>
+	                <input type="password" 
+							name="password2"
+							id="id_password2"
+							maxlength="30"
+							class="form-control" required>
 	                <label for="id_password2">Подтверждение пароля:</label>
+					<span class="helptext" id="pw-match">
+						
+					</span>
 	              </div>
 
 	              <span class="helptext">
@@ -52,7 +76,49 @@
 
 	            </form>
 
+				<script>
+					// Example starter JavaScript for disabling form submissions if there are invalid fields
+					(function() {
+					  'use strict';
+					  window.addEventListener('load', function() {
+						// Fetch all the forms we want to apply custom Bootstrap validation styles to
+						var forms = document.getElementsByClassName('form-signin');
+						// Loop over them and prevent submission
+						var validation = Array.prototype.filter.call(forms, function(form) {
+						  form.addEventListener('submit', function(event) {
+							if (form.checkValidity() === false) {
+							  event.preventDefault();
+							  event.stopPropagation();
+							}
+							form.classList.add('was-validated');
+						  }, false);
+						});
+					  }, false);
+					})();
 
+					function PasswordCheck() {
+						var pw1 = document.getElementById('id_password1');
+						var pw2 = document.getElementById('id_password2');
+						passwordsEqual = (pw1 == pw2);
+						if (passwordsEqual) {
+							txt = "Пароли не совпадают";
+							document.getElementById("pw-match").innerHTML = txt;
+						}
+                  	}
+
+					window.onload = function myFunction() {
+						var txt = '<div class="valid-feedback">Отлично!</div>\
+						<div class="invalid-feedback">Нужно заполнить правильно</div>';
+
+						var classes = ["form-label-group"];
+						for (j = 0; j < classes.length; j++) {
+							var elements = document.getElementsByClassName(classes[j]);
+							for (i = 0; i < elements.length; i++) {
+								elements[i].innerHTML = elements[i].innerHTML + txt;
+							}
+						}
+					}
+				</script>
 
 	        </div>
 	        </div>
